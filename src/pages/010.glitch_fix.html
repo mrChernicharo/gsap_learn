@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=h1, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+
+    <style>
+      #circle {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border-radius: 1000px;
+        background-color: rgb(2, 72, 202);
+        font-size: 36px;
+        font-weight: bold;
+        user-select: none;
+      }
+
+      #circle #bg {
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        border-radius: 1000px;
+        background-color: rgb(57, 154, 250);
+        top: 10px;
+        left: 10px;
+      }
+
+      #circle span {
+        position: absolute;
+        z-index: 10;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+
+    <title>Glitch Fix</title>
+  </head>
+  <body>
+    <a href="../../index.html">index</a>
+
+    <h1>010 glitch fix</h1>
+
+    <div id="circle">
+      <div id="bg"></div>
+      <span>HOVER</span>
+    </div>
+
+    <script type="module" src="./010.glitch_fix.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=h1, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Transform origin demo</title>
+
+    <style>
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        margin: 0;
+        color: #eee;
+      }
+
+      * {
+        position: relative;
+        box-sizing: border-box;
+      }
+      body {
+        background: #1d1d1d;
+        font-family: sans-serif;
+      }
+      a {
+        position: fixed;
+        color: white;
+        top: 10px;
+        left: 10px;
+        z-index: 100;
+      }
+
+      h2 span {
+        color: #f39;
+      }
+      .label {
+        text-align: center;
+        padding: 8px;
+        min-width: 125px;
+        box-shadow: 2px 2px 8px rgb(0, 0, 0, 0.8);
+        border-radius: 500px;
+        background: #f39;
+        border: 2px solid white;
+        cursor: pointer;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      h2 {
+        position: absolute;
+        top: 20px;
+        text-align: center;
+        font-weight: normal;
+      }
+
+      .demo {
+        width: 100%;
+        height: 100%;
+        background: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .box {
+        width: 300px;
+        height: 300px;
+        min-width: 300px;
+        background: dodgerblue;
+      }
+
+      .dot {
+        position: absolute;
+        background: rgba(255, 20, 20, 0.6);
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+      }
+
+      .nav {
+        color: #ccc;
+        font-size: 1em;
+        line-height: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background: #1d1d1d;
+        width: 80%;
+        padding: 20px;
+        position: absolute;
+        bottom: 20px;
+      }
+
+      .output span {
+        color: #d0782a;
+      }
+
+      input[type="radio"] {
+        margin-top: -1px;
+        vertical-align: middle;
+      }
+
+      label {
+        white-space: nowrap;
+      }
+
+      .labels {
+        position: absolute;
+      }
+
+      @media screen and (max-width: 400px) {
+        label {
+          display: block;
+          margin-bottom: 10px;
+          margin-top: 10px;
+        }
+        .labels {
+        }
+        .newLabel {
+          background: red;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="../../index.html">index</a>
+    <div class="demo">
+      <h2>
+        <span>transformOrigin</span> is set with a pair of <span>horizontal</span> and <span>vertical</span> values
+      </h2>
+      <div class="box"></div>
+      <div class="labels"></div>
+      <div class="nav">
+        <div class="radios">
+          <label>
+            <input type="radio" name="property" value="pixels" checked />
+            pixels
+          </label>
+          <label>
+            <input type="radio" name="property" value="percents" />
+            percents
+          </label>
+          <label>
+            <input type="radio" name="property" value="keywords" />
+            keywords
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="hidden">
+      <div class="label">left top</div>
+    </div>
+
+    <script type="module" src="./009.transform_origin_demo.ts"></script>
+  </body>
+</html>
