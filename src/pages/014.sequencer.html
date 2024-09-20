@@ -3,12 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=h1, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style.css" />
 
     <title>Document</title>
     <style>
       body {
-        background-color: #0e100f;
         overflow: hidden;
         margin: 0;
         padding: 0;
@@ -44,7 +43,8 @@
       .timelineDemo {
         margin: auto;
         width: 80%;
-        padding: 20px 0;
+        padding: 20px;
+        background-color: #0e100f;
       }
 
       .demoBody h1,
@@ -71,10 +71,6 @@
         line-height: 22px;
         margin-bottom: 16px;
         width: 80%;
-      }
-
-      .timelineDemo {
-        border: 1px solid red;
       }
 
       .timelineDemo .box {
@@ -240,6 +236,8 @@
   <body>
     <div class="demoBody">
       <a href="../../index.html">index</a>
+
+      <h1>Responsive sequencer</h1>
 
       <div id="sequence" class="timelineDemo">
         <div class="box green" data-color="#0ae448" id="green"></div>

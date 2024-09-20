@@ -35,9 +35,9 @@ function intializeTimeline() {
   //     .to("#purple", { x: sequenceTrackLength, xPercent: -100, duration: 1 }, "+=0.5")
   //     .to("#orange", { x: sequenceTrackLength, xPercent: -100, duration: 1.5 }, "-=0.5");
 
-  tl.to("#green", { x: "80vw", duration: 1 })
-    .to("#purple", { x: "80vw", duration: 1.5 }, "+=0.5")
-    .to("#orange", { x: "80vw", duration: 2 }, "-=0.5");
+  tl.to("#green", { x: "76vw", duration: 1 })
+    .to("#purple", { x: "76vw", duration: 1.5 }, "+=0.5")
+    .to("#orange", { x: "76vw", duration: 2 }, "-=0.5");
 
   tl.getChildren().forEach((child, index) => {
     let timelineBar = timelineItems[index];
@@ -87,9 +87,9 @@ function reset() {
       playBtn.textContent = "restart";
     },
   });
-  tl.to("#green", { x: "80vw", duration: 0.5 })
-    .to("#purple", { x: "80vw", duration: 1 }, "+=0.5")
-    .to("#orange", { x: "80vw", duration: 1.5 }, "-=0.5");
+  tl.to("#green", { x: "76vw", duration: 0.5 })
+    .to("#purple", { x: "76vw", duration: 1 }, "+=0.5")
+    .to("#orange", { x: "76vw", duration: 1.5 }, "-=0.5");
 }
 
 playBtn.onclick = () => {
