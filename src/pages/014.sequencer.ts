@@ -2,60 +2,75 @@ import gsap from "gsap";
 import { Draggable } from "gsap/Draggable";
 gsap.registerPlugin(Draggable);
 
-let width = (document.querySelector(".timelineUI") as HTMLDivElement).offsetWidth;
-let sequenceTrackLength = width;
+const playBtn = document.querySelector("#sequence .play") as HTMLButtonElement;
+const pauseBtn = document.querySelector("#sequence .pause") as HTMLButtonElement;
+const reverseBtn = document.querySelector("#sequence .reverse") as HTMLButtonElement;
+const updateBtn = document.querySelector("#sequence .update") as HTMLButtonElement;
 
-const tl = gsap.timeline({ onUpdate: sequenceUpdateDragger, paused: true });
-tl.to("#green", { x: width, xPercent: -100, duration: 2 })
-  .to("#purple", { x: width, xPercent: -100, duration: 1 })
-  .to("#orange", { x: width, xPercent: -100, duration: 1 });
-
-gsap.to(".timelineUI-tween", { opacity: 1 });
 const sequenceTime = document.querySelector("#sequenceTime") as HTMLDivElement;
 const markerCont = document.querySelector(".markers") as HTMLDivElement;
-markerCont.innerHTML = "";
+const timelineRows = Array.from(document.querySelectorAll(".timelineUI-row"));
 const sequenceDragger = document.querySelector("#sequence .timelineUI-dragger");
-let timelineItems = document.querySelectorAll(".timelineUI-tween");
-let children = tl.getChildren();
-let time = tl.duration();
+const timelineItems = document.querySelectorAll(".timelineUI-tween");
 
-for (let i = 0; i < time + 1; i++) {
-  markerCont.innerHTML += `<div class="secondMarker"></div>`;
+let sequenceTrackLength = (document.querySelector(".timelineUI") as HTMLDivElement).offsetWidth;
+
+function intializeTimeline() {
+  const tl = gsap.timeline({
+    paused: true,
+    onUpdate() {
+      gsap.set(sequenceDragger, {
+        x: sequenceTrackLength * tl.progress(),
+      });
+      sequenceTime.textContent = tl.time().toFixed(2);
+    },
+    onComplete() {
+      playBtn.textContent = "restart";
+    },
+  });
+
+  tl.to("#green", { x: sequenceTrackLength, duration: 0.5 })
+    .to("#purple", { x: sequenceTrackLength, duration: 1 }, "+=0.5")
+    .to("#orange", { x: sequenceTrackLength, duration: 1.5 }, "-=0.5");
+
+  tl.getChildren().forEach((child, index) => {
+    let timelineBar = timelineItems[index];
+
+    let width = (child.duration() / tl.duration()) * 100;
+    let startPosition = (child.startTime() / tl.duration()) * 100;
+    let color = (child as any)._targets[0].dataset.color;
+
+    gsap.set(timelineBar, {
+      width: `${width}%`,
+      marginLeft: `${startPosition}%`,
+      backgroundColor: color,
+    });
+  });
+
+  markerCont.innerHTML = "";
+
+  for (let i = 0; i < tl.duration() + 1; i++) {
+    markerCont.innerHTML += `<div class="secondMarker"></div>`;
+  }
+
+  gsap.to(".timelineUI-tween", { opacity: 1 });
+
+  let sequenceDraggable = new Draggable(sequenceDragger, {
+    type: "x",
+    bounds: { minX: 0, maxX: sequenceTrackLength },
+    trigger: "#sequence .timelineUI-dragger div",
+    onDrag() {
+      tl.progress(this.x / sequenceTrackLength).pause();
+    },
+  });
+
+  return tl;
 }
 
-function sequenceUpdateDragger() {
-  gsap.set(sequenceDragger, {
-    x: sequenceTrackLength * tl.progress(),
-  });
-  sequenceTime.textContent = tl.time().toFixed(2);
-}
+let tl = intializeTimeline();
 
-let sequenceDraggable = new Draggable(sequenceDragger, {
-  type: "x",
-  bounds: { minX: 0, maxX: sequenceTrackLength },
-  trigger: "#sequence .timelineUI-dragger div",
-  onDrag: function () {
-    tl.progress(this.x / sequenceTrackLength).pause();
-  },
-});
-
-children.forEach((child, index) => {
-  let timelineBar = timelineItems[index];
-  let duration = child.duration();
-  let startTime = child.startTime();
-  let width = (duration / time) * 100;
-  let startPosition = (startTime / time) * 100;
-  let color = (child as any)._targets[0].dataset.color;
-
-  gsap.set(timelineBar, {
-    width: `${width}%`,
-    marginLeft: `${startPosition}%`,
-    backgroundColor: color,
-  });
-});
-
-const playBtn = document.querySelector("#sequence .play") as HTMLButtonElement;
 playBtn.onclick = () => {
+  playBtn.textContent = "play";
   if (tl.progress() < 1) {
     tl.play();
   } else {
@@ -63,5 +78,27 @@ playBtn.onclick = () => {
   }
 };
 
-function onResize() {}
-window.addEventListener("resize", onResize);
+pauseBtn.onclick = () => {
+  tl.pause();
+};
+
+reverseBtn.onclick = () => {
+  playBtn.textContent = "play";
+  tl.reverse();
+};
+
+updateBtn.onclick = () => {
+  tl = intializeTimeline();
+};
+
+window.addEventListener("resize", () => {
+  sequenceTrackLength = (document.querySelector(".timelineUI") as HTMLDivElement).offsetWidth;
+  //   tl.getChildren().forEach((track) => {
+  //     console.log(track);
+  //     track.vars.x = sequenceTrackLength;
+  //   });
+});
+
+// window.addEventListener('click', () => {
+
+// })

@@ -73,6 +73,10 @@
         width: 80%;
       }
 
+      .timelineDemo {
+        border: 1px solid red;
+      }
+
       .timelineDemo .box {
         width: 50px;
         height: 50px;
@@ -92,7 +96,7 @@
         background-color: #9d95ff;
       }
 
-      .timleineUI-row {
+      .timelineUI-row {
         background-color: #2f2f2f;
         margin: 2px 0;
         padding: 4px 0;
@@ -230,9 +234,9 @@
     </style>
   </head>
   <body>
-    <a href="../../index.html">index</a>
-
     <div class="demoBody">
+      <a href="../../index.html">index</a>
+
       <div id="sequence" class="timelineDemo">
         <div class="box green" data-color="#0ae448" id="green"></div>
         <div class="box purple" data-color="#9d95ff" id="purple"></div>
@@ -247,20 +251,22 @@
           </div>
           <div class="markers"></div>
 
-          <div class="timleineUI-row">
+          <div class="timelineUI-row">
             <div class="timelineUI-tween green"></div>
           </div>
-          <div class="timleineUI-row">
+          <div class="timelineUI-row">
             <div class="timelineUI-tween purple"></div>
           </div>
-          <div class="timleineUI-row">
+          <div class="timelineUI-row">
             <div class="timelineUI-tween orange"></div>
           </div>
         </div>
         <div class="controls">
           <button class="timelineUI-button play">play</button>
-          <!-- <button class="timelineUI-button play">play</button> -->
-          <!-- <button class="timelineUI-button play">play</button> -->
+          <button class="timelineUI-button pause">pause</button>
+          <button class="timelineUI-button reverse">reverse</button>
+          <div></div>
+          <button class="timelineUI-button update">update</button>
         </div>
       </div>
     </div>
